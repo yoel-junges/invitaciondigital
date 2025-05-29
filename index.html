@@ -4,12 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>¡Andrea cumple 50 años!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@700&family=Great+Vibes&family=Alex+Brush&display=swap" rel="stylesheet">
     <style>
         :root {
             --gold: #D4AF37;
             --light-gold: #F4E4BC;
             --white: #FFFFFF;
+            --dark-gold: #B38F2A;
         }
 
         * {
@@ -18,81 +19,248 @@
             box-sizing: border-box;
         }
 
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+
         body {
             font-family: 'Playfair Display', serif;
-            background: linear-gradient(135deg, var(--white) 0%, var(--light-gold) 100%);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 2rem;
+            justify-content: center;
             color: #333;
+            background: 
+                linear-gradient(135deg, 
+                    rgba(212, 175, 55, 0.95) 0%,
+                    rgba(244, 228, 188, 0.95) 50%,
+                    rgba(212, 175, 55, 0.95) 100%
+                ),
+                url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1NiIgaGVpZ2h0PSIxMDAiPgo8cmVjdCB3aWR0aD0iNTYiIGhlaWdodD0iMTAwIiBmaWxsPSIjRkZGRkZGIj48L3JlY3Q+CjxwYXRoIGQ9Ik0yOCA2NkwwIDUwTDAgMTZMMjggMEw1NiAxNkw1NiA1MEwyOCA2NkwyOCAxMDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Q0QUYzNyIgc3Ryb2tlLXdpZHRoPSIyIj48L3BhdGg+CjxwYXRoIGQ9Ik0yOCAwTDI4IDM0TDAgNTBMMCA4NEwyOCAxMDBMNTYgODRMNTYgNTBMMjggMzQiIGZpbGw9Im5vbmUiIHN0cm9rZT0iI0Q0QUYzNyIgc3Ryb2tlLXdpZHRoPSIyIj48L3BhdGg+Cjwvc3ZnPg==');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                45deg,
+                rgba(0, 0, 0, 0.1) 0%,
+                rgba(0, 0, 0, 0.05) 100%
+            );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .main-header {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 1;
+            width: 100%;
+            pointer-events: none;
+        }
+
+        .main-number {
+            font-size: 120px;
+            font-family: 'Great Vibes', cursive;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),
+                         0 0 20px rgba(212, 175, 55, 0.5);
+            margin-bottom: 0;
+            line-height: 1;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .main-name {
+            font-size: 60px;
+            font-family: 'Alex Brush', cursive;
+            color: var(--white);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),
+                         0 0 15px rgba(212, 175, 55, 0.5);
+            margin-top: -10px;
+            margin-bottom: 30px;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        .event-info {
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 1s ease-out 0.6s both;
+            pointer-events: auto;
+            margin-bottom: 30px;
+        }
+
+        .event-info p {
+            margin: 10px 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .event-info a {
+            color: var(--white);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .event-info a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--white);
+            transition: width 0.3s ease;
+        }
+
+        .event-info a:hover::after {
+            width: 100%;
+        }
+
+        .event-info .emoji {
+            font-size: 1.8rem;
+            filter: drop-shadow(1px 1px 2px rgba(0, 0, 0, 0.2));
         }
 
         .container {
             max-width: 800px;
             width: 100%;
             text-align: center;
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.95);
             padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
-            margin: 2rem 0;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.5);
+            margin: 2rem;
+            position: relative;
+            z-index: 1;
+            animation: fadeIn 1s ease-out;
+            backdrop-filter: blur(5px);
+        }
+
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                45deg,
+                transparent 0%,
+                rgba(212, 175, 55, 0.1) 25%,
+                rgba(212, 175, 55, 0.2) 50%,
+                rgba(212, 175, 55, 0.1) 75%,
+                transparent 100%
+            );
+            background-size: 200% 200%;
+            animation: shimmer 3s infinite linear;
+            pointer-events: none;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            animation: fadeIn 1s ease-out 0.3s both;
         }
 
         .number {
             font-size: 8rem;
             color: var(--gold);
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
             margin-bottom: 0;
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Great Vibes', cursive;
+            animation: fadeIn 1s ease-out 0.5s both;
         }
 
         .name {
-            font-size: 3rem;
+            font-size: 3.5rem;
             color: var(--gold);
             margin-bottom: 2rem;
-            font-family: 'Dancing Script', cursive;
+            font-family: 'Great Vibes', cursive;
+            text-shadow: 0 0 15px rgba(212, 175, 55, 0.5);
+            animation: fadeIn 1s ease-out 0.7s both;
         }
 
         .details {
             margin: 2rem 0;
             line-height: 1.6;
+            animation: fadeIn 1s ease-out 0.9s both;
         }
 
         .details p {
             margin: 1rem 0;
             font-size: 1.2rem;
+            font-family: 'Playfair Display', serif;
         }
 
         .location-link {
             color: var(--gold);
             text-decoration: none;
             font-weight: bold;
-            transition: color 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
         }
 
-        .location-link:hover {
-            color: #B38F2A;
+        .location-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--gold);
+            transition: width 0.3s ease;
+        }
+
+        .location-link:hover::after {
+            width: 100%;
         }
 
         .button {
             display: inline-block;
             padding: 1rem 2rem;
-            background-color: var(--gold);
+            background: linear-gradient(45deg, var(--gold), var(--dark-gold));
             color: white;
             text-decoration: none;
             border-radius: 30px;
             margin: 1rem;
-            transition: transform 0.3s, background-color 0.3s;
+            transition: all 0.3s ease;
             border: none;
             cursor: pointer;
             font-family: 'Playfair Display', serif;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+            animation: fadeIn 1s ease-out 1.1s both;
         }
 
         .button:hover {
             transform: scale(1.05);
-            background-color: #B38F2A;
+            box-shadow: 0 0 30px rgba(212, 175, 55, 0.7);
         }
 
         .music-form {
@@ -100,6 +268,14 @@
             padding: 2rem;
             background: rgba(212, 175, 55, 0.1);
             border-radius: 15px;
+            animation: fadeIn 1s ease-out 1.3s both;
+        }
+
+        .music-form h3 {
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.8rem;
+            color: var(--gold);
+            margin-bottom: 1rem;
         }
 
         .music-form input {
@@ -110,91 +286,311 @@
             border: 2px solid var(--gold);
             border-radius: 5px;
             font-family: 'Playfair Display', serif;
+            transition: all 0.3s ease;
         }
 
-        .music-controls {
+        .music-form input:focus {
+            outline: none;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .music-control {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            background: var(--gold);
-            color: white;
-            padding: 10px;
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            width: 45px;
+            height: 45px;
             border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            border: 2px solid var(--white);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .music-control:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.1);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .music-control.muted {
+            opacity: 0.7;
+        }
+
+        .calendar-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.15);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            border: 2px solid var(--white);
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+            animation: fadeIn 1s ease-out 0.9s both;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .calendar-button:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .calendar-button .emoji {
+            margin-right: 8px;
+            font-size: 1.2em;
+        }
+
+        .song-suggestion {
+            margin-top: 40px;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            backdrop-filter: blur(5px);
+            border: 2px solid var(--white);
+            animation: fadeIn 1s ease-out 1.2s both;
+        }
+
+        .song-suggestion h3 {
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .song-form {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .song-input {
+            padding: 12px 20px;
+            border: 2px solid var(--white);
+            border-radius: 30px;
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            min-width: 300px;
+            backdrop-filter: blur(5px);
+            transition: all 0.3s ease;
+        }
+
+        .song-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .song-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .submit-button {
+            padding: 12px 30px;
+            background: rgba(255, 255, 255, 0.2);
+            color: var(--white);
+            border: 2px solid var(--white);
+            border-radius: 30px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(5px);
+        }
+
+        .submit-button:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.05);
+        }
+
+        .thank-you-message {
+            display: none;
+            color: var(--white);
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-top: 15px;
+            text-align: center;
+            animation: fadeIn 0.5s ease-out;
         }
 
         @media (max-width: 600px) {
-            .number {
-                font-size: 6rem;
+            .main-number {
+                font-size: 80px;
             }
-            .name {
-                font-size: 2.5rem;
+            .main-name {
+                font-size: 40px;
+                margin-bottom: 20px;
+            }
+            .event-info {
+                font-size: 1.2rem;
+            }
+            .event-info .emoji {
+                font-size: 1.5rem;
             }
             .container {
                 padding: 1rem;
+                margin: 1rem;
+            }
+            .content {
+                padding: 1.5rem;
             }
             .button {
                 padding: 0.8rem 1.5rem;
+            }
+            .music-form h3 {
+                font-size: 1.5rem;
+            }
+            .calendar-button {
+                padding: 10px 25px;
+                font-size: 1.1rem;
+            }
+            .music-control {
+                width: 40px;
+                height: 40px;
+                font-size: 1.3rem;
+            }
+            .song-suggestion {
+                padding: 20px;
+                margin-top: 30px;
+            }
+            .song-suggestion h3 {
+                font-size: 1.5rem;
+            }
+            .song-input {
+                min-width: 100%;
+                font-size: 1rem;
+            }
+            .submit-button {
+                width: 100%;
+                font-size: 1rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1 class="number">50</h1>
-        <h2 class="name">Andrea</h2>
-        
-        <div class="details">
-            <p>¡Te invitamos a celebrar este momento tan especial!</p>
-            <p>📅 Sábado, 15 de Junio de 2024</p>
-            <p>⏰ 20:00 horas</p>
-            <p>📍 <a href="https://goo.gl/maps/ejemplo" target="_blank" class="location-link">Club Social - Av. Siempreviva 123, Ciudad</a></p>
+    <div class="main-header">
+        <h1 class="main-number">50</h1>
+        <h2 class="main-name">Andrea</h2>
+        <div class="event-info">
+            <p><span class="emoji">📅</span> Sábado 22 de junio de 2025</p>
+            <p><span class="emoji">🕗</span> 21:00 hs</p>
+            <p><span class="emoji">📍</span> <a href="https://www.google.com/maps?q=Av.+Siempreviva+123,+Ciudad" target="_blank" rel="noopener noreferrer">Club Social - Av. Siempreviva 123, Ciudad</a></p>
         </div>
+        <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Cumple+Andrea+50&dates=20250622T210000/20250623T020000&details=¡Celebración+especial!&location=Club+Social+-+Av.+Siempreviva+123,+Ciudad" 
+           target="_blank" 
+           rel="noopener noreferrer" 
+           class="calendar-button">
+            <span class="emoji">📅</span> Agendar en mi calendario
+        </a>
+    </div>
 
-        <a href="#" class="button" id="calendarButton">📅 Agendar en mi calendario</a>
+    <div class="container">
+        <div class="content">
+            <h1 class="number">50</h1>
+            <h2 class="name">Andrea</h2>
+            
+            <div class="details">
+                <p>¡Te invitamos a celebrar este momento tan especial!</p>
+                <p>📅 Sábado, 15 de Junio de 2024</p>
+                <p>⏰ 20:00 horas</p>
+                <p>📍 <a href="https://goo.gl/maps/ejemplo" target="_blank" class="location-link">Club Social - Av. Siempreviva 123, Ciudad</a></p>
+            </div>
 
-        <div class="music-form">
-            <h3>¿Qué canción te gustaría que suene en el cumple?</h3>
-            <form id="songForm">
-                <input type="text" placeholder="Escribe el nombre de la canción y el artista" required>
-                <button type="submit" class="button">Enviar sugerencia</button>
-            </form>
+            <a href="#" class="button" id="calendarButton">📅 Agendar en mi calendario</a>
+
+            <div class="music-form">
+                <h3>¿Qué canción te gustaría que suene en el cumple?</h3>
+                <form id="songForm">
+                    <input type="text" placeholder="Escribe el nombre de la canción y el artista" required>
+                    <button type="submit" class="button">Enviar sugerencia</button>
+                </form>
+            </div>
+
+            <div class="song-suggestion">
+                <h3>🎶 ¿Qué canción te gustaría que suene en el cumple?</h3>
+                <form class="song-form" id="songForm">
+                    <input type="text" 
+                           class="song-input" 
+                           placeholder="Escribe el nombre de la canción y el artista" 
+                           required>
+                    <button type="submit" class="submit-button">Enviar</button>
+                </form>
+                <div class="thank-you-message" id="thankYouMessage">
+                    ¡Gracias por tu sugerencia! 🎵
+                </div>
+            </div>
         </div>
     </div>
 
-    <div class="music-controls" id="musicControl">
+    <audio id="backgroundMusic" autoplay loop>
+        <source src="musica.mp3" type="audio/mpeg">
+        Tu navegador no soporta el elemento de audio.
+    </audio>
+
+    <div class="music-control" id="musicControl" title="Pausar/Reanudar música">
         🎵
     </div>
-
-    <audio id="backgroundMusic" loop>
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
 
     <script>
         // Control de música
         const musicControl = document.getElementById('musicControl');
         const backgroundMusic = document.getElementById('backgroundMusic');
-        let isMusicPlaying = false;
+        let isMuted = false;
+
+        // Intentar reproducir automáticamente
+        backgroundMusic.play().catch(function(error) {
+            console.log("La reproducción automática fue bloqueada");
+            musicControl.textContent = '🔇';
+            isMuted = true;
+        });
 
         musicControl.addEventListener('click', () => {
-            if (isMusicPlaying) {
-                backgroundMusic.pause();
-                musicControl.textContent = '🎵';
-            } else {
+            if (isMuted) {
                 backgroundMusic.play();
-                musicControl.textContent = '⏸️';
+                musicControl.textContent = '🎵';
+                musicControl.classList.remove('muted');
+            } else {
+                backgroundMusic.pause();
+                musicControl.textContent = '🔇';
+                musicControl.classList.add('muted');
             }
-            isMusicPlaying = !isMusicPlaying;
+            isMuted = !isMuted;
         });
 
         // Formulario de canciones
         const songForm = document.getElementById('songForm');
+        const thankYouMessage = document.getElementById('thankYouMessage');
+
         songForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const songInput = songForm.querySelector('input');
-            alert(`¡Gracias por tu sugerencia! La canción "${songInput.value}" ha sido registrada.`);
+            
+            // Mostrar mensaje de agradecimiento
+            thankYouMessage.style.display = 'block';
+            
+            // Limpiar el formulario
             songInput.value = '';
+            
+            // Ocultar el mensaje después de 3 segundos
+            setTimeout(() => {
+                thankYouMessage.style.display = 'none';
+            }, 3000);
         });
 
         // Botón de calendario
