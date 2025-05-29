@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Andrea cumple 50 años!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #D4AF37;
+            --light-gold: #F4E4BC;
+            --white: #FFFFFF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Playfair Display', serif;
+            background: linear-gradient(135deg, var(--white) 0%, var(--light-gold) 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            color: #333;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+            margin: 2rem 0;
+        }
+
+        .number {
+            font-size: 8rem;
+            color: var(--gold);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 0;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .name {
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 2rem;
+            font-family: 'Dancing Script', cursive;
+        }
+
+        .details {
+            margin: 2rem 0;
+            line-height: 1.6;
+        }
+
+        .details p {
+            margin: 1rem 0;
+            font-size: 1.2rem;
+        }
+
+        .location-link {
+            color: var(--gold);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+        }
+
+        .location-link:hover {
+            color: #B38F2A;
+        }
+
+        .button {
+            display: inline-block;
+            padding: 1rem 2rem;
+            background-color: var(--gold);
+            color: white;
+            text-decoration: none;
+            border-radius: 30px;
+            margin: 1rem;
+            transition: transform 0.3s, background-color 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .button:hover {
+            transform: scale(1.05);
+            background-color: #B38F2A;
+        }
+
+        .music-form {
+            margin: 2rem 0;
+            padding: 2rem;
+            background: rgba(212, 175, 55, 0.1);
+            border-radius: 15px;
+        }
+
+        .music-form input {
+            padding: 0.8rem;
+            width: 80%;
+            max-width: 400px;
+            margin: 1rem 0;
+            border: 2px solid var(--gold);
+            border-radius: 5px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .music-controls {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--gold);
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        @media (max-width: 600px) {
+            .number {
+                font-size: 6rem;
+            }
+            .name {
+                font-size: 2.5rem;
+            }
+            .container {
+                padding: 1rem;
+            }
+            .button {
+                padding: 0.8rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="number">50</h1>
+        <h2 class="name">Andrea</h2>
+        
+        <div class="details">
+            <p>¡Te invitamos a celebrar este momento tan especial!</p>
+            <p>📅 Sábado, 15 de Junio de 2024</p>
+            <p>⏰ 20:00 horas</p>
+            <p>📍 <a href="https://goo.gl/maps/ejemplo" target="_blank" class="location-link">Club Social - Av. Siempreviva 123, Ciudad</a></p>
+        </div>
+
+        <a href="#" class="button" id="calendarButton">📅 Agendar en mi calendario</a>
+
+        <div class="music-form">
+            <h3>¿Qué canción te gustaría que suene en el cumple?</h3>
+            <form id="songForm">
+                <input type="text" placeholder="Escribe el nombre de la canción y el artista" required>
+                <button type="submit" class="button">Enviar sugerencia</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="music-controls" id="musicControl">
+        🎵
+    </div>
+
+    <audio id="backgroundMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // Control de música
+        const musicControl = document.getElementById('musicControl');
+        const backgroundMusic = document.getElementById('backgroundMusic');
+        let isMusicPlaying = false;
+
+        musicControl.addEventListener('click', () => {
+            if (isMusicPlaying) {
+                backgroundMusic.pause();
+                musicControl.textContent = '🎵';
+            } else {
+                backgroundMusic.play();
+                musicControl.textContent = '⏸️';
+            }
+            isMusicPlaying = !isMusicPlaying;
+        });
+
+        // Formulario de canciones
+        const songForm = document.getElementById('songForm');
+        songForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const songInput = songForm.querySelector('input');
+            alert(`¡Gracias por tu sugerencia! La canción "${songInput.value}" ha sido registrada.`);
+            songInput.value = '';
+        });
+
+        // Botón de calendario
+        const calendarButton = document.getElementById('calendarButton');
+        calendarButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            const event = {
+                title: 'Cumpleaños de Andrea - 50 años',
+                description: '¡Celebración especial!',
+                location: 'Club Social - Av. Siempreviva 123, Ciudad',
+                startTime: '2024-06-15T20:00:00',
+                endTime: '2024-06-16T02:00:00'
+            };
+
+            const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.startTime}/${event.endTime}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`;
+            window.open(calendarUrl, '_blank');
+        });
+    </script>
+</body>
+</html> 
