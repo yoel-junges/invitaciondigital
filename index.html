@@ -789,8 +789,8 @@
                 title: 'Cumpleaños de Andrea - 50 años',
                 description: '¡Celebración especial!',
                 location: 'Simonah Disco - Av. Los Colonizadores 735, Esperanza',
-                startTime: '2025-07-08T21:00:00',
-                endTime: '2025-07-09T03:00:00'
+                startTime: '20250708T210000',
+                endTime: '20250709T030000'
             };
 
             const calendarUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(event.title)}&dates=${event.startTime}/${event.endTime}&details=${encodeURIComponent(event.description)}&location=${encodeURIComponent(event.location)}`;
@@ -817,6 +817,38 @@
         // Actualizar el contador cada segundo
         setInterval(updateCountdown, 1000);
         updateCountdown(); // Actualizar inmediatamente al cargar la página
+
+        // Función para copiar el CBU al portapapeles
+        function copyCBU() {
+            const cbuNumber = document.getElementById('cbuNumber').textContent;
+            
+            // Crear un elemento de texto temporal
+            const tempInput = document.createElement('input');
+            tempInput.value = cbuNumber;
+            document.body.appendChild(tempInput);
+            
+            // Seleccionar y copiar el texto
+            tempInput.select();
+            tempInput.setSelectionRange(0, 99999); // Para dispositivos móviles
+            
+            try {
+                // Intentar copiar usando la API del portapapeles
+                navigator.clipboard.writeText(cbuNumber).then(() => {
+                    alert('CBU copiado al portapapeles');
+                }).catch(() => {
+                    // Fallback para navegadores que no soportan la API del portapapeles
+                    document.execCommand('copy');
+                    alert('CBU copiado al portapapeles');
+                });
+            } catch (err) {
+                // Fallback para navegadores más antiguos
+                document.execCommand('copy');
+                alert('CBU copiado al portapapeles');
+            }
+            
+            // Limpiar
+            document.body.removeChild(tempInput);
+        }
     </script>
 </body>
 </html> 
